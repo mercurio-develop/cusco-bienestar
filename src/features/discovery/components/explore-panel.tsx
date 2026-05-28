@@ -279,7 +279,7 @@ export function ExplorePanel({ businesses, totalCount, selectedId, setSelectedId
            )}
         </div>
       )}
-      <Footer lang={lang} />
+      <Footer />
     </div>
   )
 }

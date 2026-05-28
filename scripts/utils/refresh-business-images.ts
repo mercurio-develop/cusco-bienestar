@@ -56,7 +56,7 @@ async function main() {
           const enhanced = enhanceImageUrl(validImageUrl);
           await prisma.business.update({
             where: { id: target.id },
-            data: { imageUrl: enhanced }
+            data: { imageUrl: enhanced as string }
           });
           console.log(`   ✅ Success! Found image in ${images.length} photos.`);
         } else {

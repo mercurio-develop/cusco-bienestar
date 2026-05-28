@@ -79,7 +79,7 @@ async function main() {
     let updatedCount = 0;
 
     for (const item of items) {
-      const searchStr = item.searchQuery?.term as string;
+      const searchStr = (item.searchQuery as any)?.term as string;
       if (!searchStr) continue;
 
       const matchedBusiness = searchMap.get(searchStr);

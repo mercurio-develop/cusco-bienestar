@@ -50,7 +50,7 @@ async function main() {
 
     try {
       const { object } = await generateObject({
-        model: google('gemini-2.5-flash', { useSearchGrounding: true }),
+        model: google('gemini-2.5-flash'),
         schema: z.object({
           website: z.string().url().nullable().describe('The official website URL of the business if found, otherwise null. Only return the official website, do not return Tripadvisor, Facebook, or OTA links.'),
           whatsapp: z.string().nullable().describe('A public contact phone number for the business if found, otherwise null. Format as a string of digits.')

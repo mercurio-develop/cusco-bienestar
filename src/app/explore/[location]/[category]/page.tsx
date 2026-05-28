@@ -25,19 +25,24 @@ const LOCATION_LABELS: Record<string, string> = {
 }
 
 export async function generateStaticParams() {
-  const combinations = await prisma.business.groupBy({
-    by: ['locationSlug', 'category'],
-  })
-  
-  const params: { location: string, category: string, lang: string }[] = []
-  combinations
-    .filter(c => c.locationSlug && c.category)
-    .forEach(c => {
-      params.push({ location: c.locationSlug as string, category: c.category as string, lang: 'en' })
-      params.push({ location: c.locationSlug as string, category: c.category as string, lang: 'es' })
+  try {
+    const combinations = await prisma.business.groupBy({
+      by: ['locationSlug', 'category'],
     })
     
-  return params
+    const params: { location: string, category: string, lang: string }[] = []
+    combinations
+      .filter(c => c.locationSlug && c.category)
+      .forEach(c => {
+        params.push({ location: c.locationSlug as string, category: c.category as string, lang: 'en' })
+        params.push({ location: c.locationSlug as string, category: c.category as string, lang: 'es' })
+      })
+      
+    return params
+  } catch (e) {
+    console.warn("Skipping static params for explore category due to DB connection error");
+    return [];
+  }
 }
 
 export async function generateMetadata({

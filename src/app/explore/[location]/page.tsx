@@ -31,19 +31,24 @@ const CATEGORY_LABELS: Record<string, { label: string; emoji: string }> = {
 }
 
 export async function generateStaticParams() {
-  const combinations = await prisma.business.groupBy({
-    by: ['locationSlug'],
-  })
-  
-  const params: { location: string, lang: string }[] = []
-  combinations
-    .filter(c => c.locationSlug)
-    .forEach(c => {
-      params.push({ location: c.locationSlug as string, lang: 'en' })
-      params.push({ location: c.locationSlug as string, lang: 'es' })
+  try {
+    const combinations = await prisma.business.groupBy({
+      by: ['locationSlug'],
     })
     
-  return params
+    const params: { location: string, lang: string }[] = []
+    combinations
+      .filter(c => c.locationSlug)
+      .forEach(c => {
+        params.push({ location: c.locationSlug as string, lang: 'en' })
+        params.push({ location: c.locationSlug as string, lang: 'es' })
+      })
+      
+    return params
+  } catch (e) {
+    console.warn("Skipping static params for explore location due to DB connection error");
+    return [];
+  }
 }
 
 export async function generateMetadata({

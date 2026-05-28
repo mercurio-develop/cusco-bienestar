@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+export const dynamic = 'force-dynamic';
+
+import { prisma } from "@/lib/prisma";
 import { siteConfig } from '@/lib/config/site'
 
 export const revalidate = 86400 // Cache for 24 hours
