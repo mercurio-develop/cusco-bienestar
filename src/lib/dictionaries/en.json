@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "explore": "Explore",
+    "machuPicchu": "Machu Picchu",
+    "concierge": "Concierge"
+  },
+  "home": {
+    "heroTitle1": "Your door to Cusco,",
+    "heroTitle2": "the Sacred Valley & Machu Picchu",
+    "heroSubtitle": "Discover incredible places, craft personalized itineraries with our AI Concierge, and connect directly with trusted guides and boutique stays. Experience the heart of the Andes like never before.",
+    "searchPlaceholder": "e.g., 'Recommend me the best restaurant in the valley'",
+    "working": "Working...",
+    "search": "Search",
+    "popularItineraries": "Popular Pre-Built Itineraries",
+    "trips": {
+      "classic": "Classic Sacred Valley Full Day",
+      "cusco": "Cusco City Tour",
+      "ruins": "The Ultimate Inca Ruins Tour",
+      "culinary": "Top 7 Culinary Route in Cusco",
+      "maras": "Maras, Moray & Chinchero",
+      "artisan": "Best Artisan Markets",
+      "machupicchu": "Machu Picchu Complete Day",
+      "coffeecacao": "Coffee & Cacao Route"
+    },
+    "pills": {
+      "dining": "Best restaurants",
+      "stays": "Best stays",
+      "wellness": "Wellness retreats",
+      "spiritual": "Spiritual experiences",
+      "artisan": "Artisan markets",
+      "tours": "Local tours"
+    },
+    "featuresTag": "Discover the Sacred Valley",
+    "featuresTitle": "Authentic Experiences.<br/>Direct Connections.",
+    "featuresSubtitle": "UnlockCusco is an AI-powered local discovery platform connecting you directly with authentic businesses, reliable transport, and trusted services in the Sacred Valley, Peru.",
+    "feat1Title": "Interactive Exploration",
+    "feat1Desc": "Explore the Sacred Valley through an immersive 3D map. Find exactly what you need with distinct category markers and connect directly with local business owners.",
+    "feat1Sub1Title": "Direct WhatsApp Access",
+    "feat1Sub1Desc": "Skip the middlemen. Tap to instantly open a WhatsApp conversation with verified local guides and businesses.",
+    "feat1Sub2Title": "Curated Categories",
+    "feat1Sub2Desc": "Easily filter between boutique stays, trusted guides, local dining, and wellness retreats using intuitive map markers.",
+    "feat2Title": "AI Concierge",
+    "feat2Desc": "Your personal guide to the Andes. Our intelligent assistant helps you discover the perfect experiences based on your exact location and preferences.",
+    "feat2Sub1Title": "Visual Route Building",
+    "feat2Sub1Desc": "Add experiences block-by-block to visually see your route mapped out for the day.",
+    "feat2Sub2Title": "Contextual Advice",
+    "feat2Sub2Desc": "Ask questions about altitude, local customs, or hidden gems and receive instant, localized recommendations."
+  },
+  "navbar": {
+    "towns": "Towns",
+    "howToUse": "How to use UnlockCusco",
+    "quickGuide": "Quick guide to planning your perfect Sacred Valley trip.",
+    "mapIconTitle": "Map Icon (Towns & Filters)",
+    "mapIconDesc": "Use the unified filter in the top left of the map to select specific towns (like Pisac or Ollantaytambo) and filter by categories (Dining, Stays, Wellness, etc.).",
+    "compassIconTitle": "Compass Icon (Discover Mode)",
+    "compassIconDesc": "Use <b>Discover</b> mode to explore points of interest across the valley. Click places to add them to your itinerary.",
+    "routeIconTitle": "Route Icon (Itinerary Builder)",
+    "routeIconDesc": "In the Itinerary tab, you can add, remove, and reorder stops. Set your starting and ending points by clicking them on the map.",
+    "sparklesIconTitle": "Sparkles Icon (AI Concierge)",
+    "sparklesIconDesc": "Tap the Concierge button to open the chat. The AI can build an entire day for you based on your preferences, check Boleto Turístico info, and estimate taxi fares.",
+    "settingsIconTitle": "Settings Icon (Preferences)",
+    "settingsIconDesc": "Tap the settings icon to set your \"Travel Vibe\" and \"Intensity Level\". The Concierge uses this to give you highly personalized recommendations.",
+    "closeHelp": "Close Help",
+    "travelPreferences": "Travel Preferences",
+    "preferencesDesc": "Set your vibe and intensity to get highly personalized recommendations from the Concierge.",
+    "travelVibe": "Travel Vibe",
+    "intensityLevel": "Intensity Level",
+    "vibes": {
+      "LIVING_CULTURE": "Living Culture",
+      "GASTRONOMIC": "Gastronomic",
+      "LUXURY_WELLNESS": "Luxury Wellness",
+      "SPIRITUAL": "Spiritual",
+      "MOUNTAIN_EXPLORER": "Mountain Explorer"
+    },
+    "intensities": {
+      "1": {
+        "label": "Level 1",
+        "desc": "Accessible"
+      },
+      "2": {
+        "label": "Level 2",
+        "desc": "Immersive"
+      },
+      "3": {
+        "label": "Level 3",
+        "desc": "The Edge"
+      }
+    },
+    "intensityNote": "Level 1 is relaxed and safe. Level 3 is extreme and off-the-beaten-path.",
+    "savePreferences": "Save & Close Preferences",
+    "changeLanguage": "Change Language",
+    "helpInstructions": "Help & Instructions"
+  },
+  "explore": {
+    "errorLoading": "Error loading data",
+    "retry": "Retry",
+    "consulting": "Consulting the Valley...",
+    "updating": "Updating...",
+    "building": "Building the workspace...",
+    "exploreUnlockCusco": "Explore",
+    "discover": "Discover",
+    "concierge": "Concierge",
+    "itinerary": "Itinerary",
+    "featureDisabled": "Feature disabled",
+    "searchPlaceholder": "Search Sacred Valley...",
+    "filters": "Filters",
+    "resetAll": "Reset All",
+    "townSector": "Town / Sector",
+    "anywhere": "Anywhere",
+    "categoriesLabel": "Categories",
+    "all": "All",
+    "radiusSearch": "Radius Search",
+    "locating": "Locating...",
+    "usingGps": "Using GPS",
+    "myLocation": "My Location",
+    "viewResults": "View Results",
+    "exploreTheValley": "Explore The Valley",
+    "sacredValley": "Sacred Valley",
+    "locationDesc": "Discover unlisted experiences, hidden gems, and fully organized itineraries in {loc}. Book directly with local providers with zero commissions.",
+    "verifiedLocations": "verified locations in",
+    "backTo": "Back to",
+    "categoryDesc": "Explore the best {category} options in {loc}.",
+    "categoryDescriptions": {
+      "dining": "Experience the culinary renaissance of the Andes. From traditional *picanterías* serving slow-roasted guinea pig to avant-garde restaurants blending local ingredients with modern techniques, the Sacred Valley offers a world-class dining experience.",
+      "wellness": "Reconnect with your inner self. Discover holistic spas, ancient Inca healing therapies, yoga retreats, and meditation centers nestled in the tranquil mountains of the Sacred Valley.",
+      "adventure": "Get your adrenaline pumping. The Sacred Valley is a playground for thrill-seekers, offering world-class trekking, ATV tours, white-water rafting, and zip-lining across breathtaking landscapes.",
+      "stays": "Rest in unparalleled comfort. Whether you seek a luxury eco-lodge, a boutique hotel, or a cozy family-run inn, find the perfect basecamp for your Andean explorations.",
+      "culture": "Immerse yourself in living history. Explore vibrant artisan markets, ancient ruins, traditional textile weaving centers, and interactive workshops that preserve the legacy of the Incas."
+    },
+    "categories": {
+      "Template": "Template",
+      "Boleto": "Tourist Ticket",
+      "Adventure": "Adventure",
+      "Wellness": "Wellness",
+      "Spiritual": "Spiritual",
+      "Culture": "Culture",
+      "Dining": "Dining",
+      "Textiles": "Textiles",
+      "Stays": "Stays",
+      "Transport": "Transport",
+      "Agency": "Agency"
+    }
+  },
+  "business": {
+    "checkAvailability": "Check Availability",
+    "reviews": "Traveler Reviews",
+    "verifiedReview": "Verified Review",
+    "about": "About",
+    "moreIn": "More in",
+    "otherExperiences": "Other Experiences in",
+    "exploreNearby": "Explore Nearby Towns",
+    "operatedBy": "Operated by UnlockCusco Concierge",
+    "priceRange": "Price Range",
+    "connectDirectly": "Connect Directly",
+    "replyTime": "Usually replies within 1 hour",
+    "verifiedLocal": "Verified Local Business"
+  },
+  "templates": {
+    "gastronomic": {
+      "title": "Menu Highlights",
+      "subtitle": "Flavors of the Sacred Valley",
+      "signatureDish": "Signature Dish",
+      "emptyState": "The digital menu is being updated. Stay tuned!"
+    },
+    "expedition": {
+      "title": "Trekking & Circuits",
+      "subtitle": "Upcoming available expeditions",
+      "days": "Days",
+      "highlights": "Highlights",
+      "included": "Included",
+      "priceFrom": "Price from",
+      "perPerson": "per person",
+      "intensity": "Intensity",
+      "emptyState": "Searching for new trails. Expedition dates coming soon!"
+    },
+    "sanctuary": {
+      "title": "Healing & Wellness",
+      "subtitle": "Our rituals combine ancestral Andean wisdom with modern techniques to restore your vital balance.",
+      "minutes": "Minutes",
+      "details": "Details",
+      "emptyState": "Preparing the sacred space. Sanctuary sessions available soon."
+    }
+  },
+  "common": {
+    "back": "Back"
+  },
+  "discoverPanel": {
+    "places": "Places",
+    "sort": "Sort:",
+    "recommended": "Recommended",
+    "sortOptions": {
+      "recommended": "Recommended",
+      "rating_desc": "Highest Rated",
+      "price_asc": "Price (Low to High)",
+      "price_desc": "Price (High to Low)"
+    },
+    "radius": "Radius",
+    "emptyTitle": "No places in this area",
+    "emptyDesc": "Try panning or zooming out the map to find more places, or clear your filters to see the whole Valley.",
+    "resetFilters": "Reset all filters",
+    "itineraryMode": "Itinerary Mode",
+    "pickStart": "Pick a new start location",
+    "pickEnd": "Pick a new end destination",
+    "swapPlace": "Select a place to swap",
+    "addStop": "Browse and click 'Add' on a place to add it as a stop"
+  },
+  "_meta_lang": "en",
+  "businessCard": {
+    "setStart": "Set as Start",
+    "setEnd": "Set as End",
+    "viewProfile": "View Profile",
+    "whatsapp": "WhatsApp",
+    "requiresBoleto": "Requires Boleto Turístico",
+    "boletoTitle": "Cusco Tourist Ticket (BTC)",
+    "boletoDesc1": "This site requires the",
+    "boletoDesc2": "It's a unified government-managed ticket allowing access to up to 16 major archaeological sites and museums in Cusco and the Sacred Valley.",
+    "options": "Options:",
+    "fullTicket": "Full Ticket (130 Soles):",
+    "fullTicketDesc": "Valid for 10 days. Includes all 16 sites across Cusco, Sacred Valley, and South Valley.",
+    "partialTicket": "Partial Ticket (70 Soles):",
+    "partialTicketDesc": "Valid for 1-2 days for a specific circuit (e.g., Sacred Valley ruins only).",
+    "note": "Note: The ticket cannot be purchased online in advance. It must be bought in person at the COSITUC office (Av. El Sol 103, Cusco) or at the entrance of the first site you visit.",
+    "gotIt": "Got it",
+    "selected": "Selected",
+    "swap": "Swap",
+    "exchange": "Exchange",
+    "add": "Add",
+    "map": "Map",
+    "details": "Details",
+    "verified": "Verified"
+  },
+  "sorocheGuide": {
+    "metadata": {
+      "title": "How to Avoid & Heal Soroche (Altitude Sickness) in Cusco",
+      "description": "A practical, natural guide to preventing and treating altitude sickness (soroche) in Cusco, Peru. Learn about Coca tea, hydration, and proper acclimatization."
+    },
+    "title": "How to Avoid & Heal Soroche (Altitude Sickness) in Cusco",
+    "desc": "Cusco sits at 11,150 feet (3,400 meters) above sea level. It is completely normal to feel the altitude, but with a little preparation and traditional Andean remedies, you can enjoy your trip worry-free.",
+    "h2_1": "What is Soroche?",
+    "p1_1": "Soroche is the local word for altitude sickness. It happens because there is less oxygen in the air at high elevations. Symptoms include mild headaches, fatigue, and shortness of breath.",
+    "h2_2": "Prevention First (The Golden Rules)",
+    "l2_1_strong": "Take it easy:",
+    "l2_1_text": " Your first day in Cusco should be for resting. Do not plan strenuous hikes right away.",
+    "l2_2_strong": "Hydrate constantly:",
+    "l2_2_text": " Drink much more water than usual. The mountain air is dry.",
+    "l2_3_strong": "Eat light:",
+    "l2_3_text": " Avoid heavy, fatty meals when you arrive, as digestion slows down at high altitudes.",
+    "h2_3": "Natural & Traditional Remedies",
+    "l3_1_strong": "Coca Tea (Mate de Coca):",
+    "l3_1_text": " The ancient Andean remedy. Coca leaves are a mild stimulant that help with digestion and oxygenation. Drink it in the morning or afternoon.",
+    "l3_2_strong": "Muña Tea:",
+    "l3_2_text": " Andean mint is excellent for settling the stomach and relieving altitude symptoms.",
+    "l3_3_strong": "Agua de Florida:",
+    "l3_3_text": " An herbal cologne used by local guides. Inhaling its scent helps open up the airways and clear the mind.",
+    "h2_4": "When to seek help",
+    "p4_1": "If you have a severe headache or strong nausea, don't worry. Most hotels in Cusco have oxygen tanks at the front desk. A few minutes of oxygen is usually all it takes to feel like yourself again.",
+    "callToAction": "Want an acclimatization-friendly itinerary?",
+    "callToActionDesc": "Ask our AI Concierge to design a travel plan that gradually increases in altitude, ensuring you stay healthy.",
+    "askAi": "Ask the AI Concierge"
+  }
+}
