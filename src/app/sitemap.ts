@@ -5,17 +5,24 @@ import { prisma } from '@/lib/prisma'
 import { siteConfig } from '@/lib/config/site'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Fetch all active businesses
-  const businesses = await prisma.business.findMany({
-    select: {
-      slug: true,
-    },
-  });
+  let businesses: { slug: string }[] = [];
+  let combinations: any = [];
 
-  // Fetch all location/category combinations for the explore directory
-  const combinations = await prisma.business.groupBy({
-    by: ['locationSlug', 'category'],
-  });
+  try {
+    // Fetch all active businesses
+    businesses = await prisma.business.findMany({
+      select: {
+        slug: true,
+      },
+    });
+
+    // Fetch all location/category combinations for the explore directory
+    combinations = await prisma.business.groupBy({
+      by: ['locationSlug', 'category'],
+    });
+  } catch (error) {
+    console.warn("Failed to fetch from Prisma for sitemap, using empty arrays fallback.", error);
+  }
 
   const baseUrl = siteConfig.url;
 
@@ -55,8 +62,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Explore location/category routes
   const exploreRoutes = combinations
-    .filter(c => c.locationSlug && c.category)
-    .flatMap((c) => [
+    .filter((c: any) => c.locationSlug && c.category)
+    .flatMap((c: any) => [
       {
         url: `${baseUrl}/en/explore/${c.locationSlug}/${c.category}`,
         changeFrequency: 'weekly' as const,

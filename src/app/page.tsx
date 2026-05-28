@@ -2,6 +2,7 @@ import { HeroSection, FeaturesSection } from "@/features/landing"
 import { siteConfig } from "@/lib/config/site"
 import type { Metadata } from "next"
 import { getDictionary, Locale } from "@/lib/dictionaries"
+import { JsonLd } from "@/components/ui/json-ld"
 
 
 interface PageProps {
@@ -52,10 +53,7 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <div className="bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <HeroSection dict={dict.home} />
       <FeaturesSection dict={dict.home} />
 
