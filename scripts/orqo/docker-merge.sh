@@ -1,8 +1,16 @@
 #!/bin/bash
 set -eo pipefail
 
+AI_TOOL=${1:-gemini} # Default to gemini if not provided
+
+# Validate AI tool
+if [[ "$AI_TOOL" != "gemini" && "$AI_TOOL" != "claude" ]]; then
+  echo "Invalid AI tool specified. Choose 'gemini' or 'claude'."
+  exit 1
+fi
+
 echo "======================================"
-echo " Docker Auto-Merge Agent Started"
+echo " Docker Auto-Merge Agent Started (Tool: $AI_TOOL)"
 echo "======================================"
 
 # Ensure the Docker image exists
@@ -74,13 +82,6 @@ echo "AI Review Result: $REVIEW_RESULT"
 if [[ "$REVIEW_RESULT" == *"APPROVE"* ]]; then
   echo "AI approved the PR. Merging..."
   git merge --no-ff "$BRANCH_NAME" -m "Merge branch '$BRANCH_NAME' (AI Approved)"
-  git push origin main
-  mv "$ISSUE_FILE" "issues/done/"
-  echo "Successfully merged $TASK_NAME!"
-else
-  echo "AI rejected the PR. Returning issue to todo..."
-  mv "$ISSUE_FILE" "issues/todo/"
-fi'$BRANCH_NAME' (AI Approved)"
   git push origin main
   mv "$ISSUE_FILE" "issues/done/"
   echo "Successfully merged $TASK_NAME!"
