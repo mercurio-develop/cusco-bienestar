@@ -33,20 +33,26 @@ git fetch origin
 DIFF=$(git diff main...$BRANCH_NAME)
 
 # Stop if diff is huge to avoid context limits
+# Escape @ symbols in DIFF so gemini CLI does not expand them as files
+ESCAPED_DIFF="${DIFF//@/\\@}"
+
 if [ ${#DIFF} -gt 150000 ]; then
   echo "Diff is too large for immediate context. Bypassing deep review for now or requires chunking."
   REVIEW_RESULT="APPROVE"
 else
   # Review the diff using the containerized agent
   echo "Running AI Code Review via Sandbox..."
-  # Use process substitution or echo to safely pass diff to gemini
   REVIEW_RESULT=$(docker run --rm \
     -v "$(pwd):/workspace" \
     -w /workspace \
+    -v "$HOME/.gemini:/home/node/.gemini" \
+    -v "$HOME/.gemini/hooks:/home/tushita/.gemini/hooks" \
     -e GEMINI_API_KEY="$GEMINI_API_KEY" \
+    -e GEMINI_CLI_TRUST_WORKSPACE=true \
     --user $(id -u):$(id -g) \
     gemini-sandbox \
-    bash -c "gemini \"You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:\"$'\n'\"$DIFF\"")
+    gemini -y -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+$ESCAPED_DIFF")
 fi
 
 echo "AI Review Result: $REVIEW_RESULT"

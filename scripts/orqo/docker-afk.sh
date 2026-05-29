@@ -35,7 +35,7 @@ for ((i=1; i<=$1; i++)); do
   mv "$ISSUE_FILE" "issues/in-progress/"
   
   # 2. Isolate
-  git checkout -b "$BRANCH_NAME"
+  git checkout -B "$BRANCH_NAME"
   
   # 3. Execute inside Docker
   commits=$(git log -n 5 --format="%H%n%ad%n%B---" --date=short 2>/dev/null || echo "No commits found")
@@ -49,10 +49,13 @@ for ((i=1; i<=$1; i++)); do
   docker run --rm \
     -v "$(pwd):/workspace" \
     -w /workspace \
+    -v "$HOME/.gemini:/home/node/.gemini" \
+    -v "$HOME/.gemini/hooks:/home/tushita/.gemini/hooks" \
     -e GEMINI_API_KEY="$GEMINI_API_KEY" \
+    -e GEMINI_CLI_TRUST_WORKSPACE=true \
     --user $(id -u):$(id -g) \
     gemini-sandbox \
-    gemini "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+    gemini -y -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
 
   # 4. Finalize
   if [[ -n $(git status -s) ]]; then
