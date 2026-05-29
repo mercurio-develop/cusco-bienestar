@@ -11,7 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params
   const isEs = lang === 'es'
-  const title = isEs ? "Explorar el Cusco, Valle Sagrado y Machu Picchu | UNLOCKCUSCO" : "Explore Cusco, the Sacred Valley & Machu Picchu | UNLOCKCUSCO"
+  const title = isEs ? "Explorar el Cusco, Valle Sagrado y Machu Picchu | CUSCO BIENESTAR" : "Explore Cusco, the Sacred Valley & Machu Picchu | CUSCO BIENESTAR"
   const description = isEs 
     ? "Descubre experiencias, joyas ocultas e itinerarios para explorar el Cusco, Valle Sagrado y Machu Picchu. Reserva directamente sin comisiones." 
     : "Discover experiences, hidden gems, and itineraries to explore Cusco, the Sacred Valley and Machu Picchu. Book directly with no commissions."

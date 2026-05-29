@@ -55,7 +55,7 @@ export async function generateMetadata({
   const cat = getCategoryData(category)
   const isEs = lang === 'es'
   
-  const title = isEs ? `${cat.label} en ${loc} — UNLOCKCUSCO Valle Sagrado` : `${cat.label} in ${loc} — UNLOCKCUSCO Sacred Valley`
+  const title = isEs ? `${cat.label} en ${loc} — CUSCO BIENESTAR Valle Sagrado` : `${cat.label} in ${loc} — CUSCO BIENESTAR Sacred Valley`
   const description = isEs
     ? `Descubre los mejores negocios de ${cat.label} en ${loc}, Valle Sagrado. Reserva directamente sin comisiones vía WhatsApp.`
     : `Discover the best ${cat.label} businesses in ${loc}, Sacred Valley. Book directly with zero commissions via WhatsApp.`
@@ -126,7 +126,7 @@ export default async function CategoryPage({
       {
         "@type": "ListItem",
         "position": 1,
-        "name": dict.explore.exploreUnlockCusco,
+        "name": dict.explore.exploreCuscoBienestar,
         "item": `${siteConfig.url}/${lang}/explore`
       },
       {

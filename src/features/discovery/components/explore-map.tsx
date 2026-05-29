@@ -891,7 +891,7 @@ export default function ExploreMap({ businesses, selectedId, onSelectBusiness, m
         <StyleSwitcherControl mapMode={mapMode as string} setMapMode={setMapMode as any} />
       </Map>
 
-      <div className="absolute bottom-1 left-2 z-10 text-[9px] text-slate-400/40 pointer-events-none uppercase tracking-tighter">UnlockCusco OS × Apple Maps Style</div>
+      <div className="absolute bottom-1 left-2 z-10 text-[9px] text-slate-400/40 pointer-events-none uppercase tracking-tighter">Cusco Bienestar OS × Apple Maps Style</div>
       {mapClickMode && (
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5 bg-slate-900/95 text-white text-xs font-bold pl-5 pr-1.5 py-1.5 rounded-full shadow-xl backdrop-blur-sm select-none">
           <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse shrink-0" />

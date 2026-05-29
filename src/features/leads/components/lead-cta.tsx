@@ -89,14 +89,14 @@ export function LeadCTA({ businessName, lead }: LeadCTAProps) {
               <div className="bg-slate-50 rounded-2xl p-4 mb-6">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Platform Referral</p>
                 <p className="text-sm text-slate-700 italic">
-                  &quot;Hi! I found {businessName} through UNLOCKCUSCO and I&apos;m interested in booking for {displayDate}.&quot;
+                  &quot;Hi! I found {businessName} through CUSCO BIENESTAR and I&apos;m interested in booking for {displayDate}.&quot;
                 </p>
               </div>
 
               <div className="flex gap-3">
                 {lead.touristPhone ? (
                   <a
-                    href={`https://wa.me/${lead.touristPhone.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi ${lead.touristName}! I am from ${businessName}. I saw your inquiry on UnlockCusco for ${displayDate}. Shall I confirm your reservation?`)}`}
+                    href={`https://wa.me/${lead.touristPhone.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi ${lead.touristName}! I am from ${businessName}. I saw your inquiry on Cusco Bienestar for ${displayDate}. Shall I confirm your reservation?`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3 rounded-xl hover:bg-green-600 transition-colors"
@@ -105,7 +105,7 @@ export function LeadCTA({ businessName, lead }: LeadCTAProps) {
                   </a>
                 ) : null}
                 <a
-                  href={`mailto:${lead.touristEmail}?subject=UNLOCKCUSCO Booking - ${businessName}&body=Hi ${lead.touristName}!`}
+                  href={`mailto:${lead.touristEmail}?subject=CUSCO BIENESTAR Booking - ${businessName}&body=Hi ${lead.touristName}!`}
                   className="flex-1 flex items-center justify-center gap-2 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors"
                 >
                   <Mail className="w-4 h-4" /> Email
