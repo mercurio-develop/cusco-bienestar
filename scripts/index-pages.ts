@@ -58,8 +58,8 @@ async function main() {
   });
 
   const urls = businesses.flatMap(b => [
-    `https://unlockcusco.com/en/business/${b.slug}`,
-    `https://unlockcusco.com/es/business/${b.slug}`
+    `https://cuscobienestar.com/en/business/${b.slug}`,
+    `https://cuscobienestar.com/es/business/${b.slug}`
   ]);
 
   console.info(`🚀 Starting indexing for ${urls.length} URLs...`);

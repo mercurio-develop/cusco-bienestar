@@ -29,7 +29,7 @@ for ((i=1; i<=$1; i++)); do
   mv "$ISSUE_FILE" "issues/in-progress/"
   
   # 2. Isolate
-  git checkout -b "$BRANCH_NAME"
+  git checkout -B "$BRANCH_NAME"
   
   # 3. Execute
   commits=$(git log -n 5 --format="%H%n%ad%n%B---" --date=short 2>/dev/null || echo "No commits found")
@@ -37,7 +37,7 @@ for ((i=1; i<=$1; i++)); do
   prompt=$(cat scripts/orqo/prompt.md 2>/dev/null || echo "")
 
   echo "Running agent for $TASK_NAME..."
-  output=$(gemini "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes.")
+  output=$(gemini -y -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes.")
   echo "$output"
 
   # 4. Finalize

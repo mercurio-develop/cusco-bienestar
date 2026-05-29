@@ -8,11 +8,11 @@ Breaking changes — APIs, conventions, file structure may differ from training 
 
 ---
 
-# UNLOCKCUSCO — Agent Handoff Brief
+# CUSCO BIENESTAR — Agent Handoff Brief
 
 ## What this is
 
-**UNLOCKCUSCO** = AI-powered local business discovery platform, Sacred Valley, Peru. Tourists search + book experiences; local businesses claim profiles for direct WhatsApp leads. MVP monetization: S/5 one-time identity validation + S/49/month subscription.
+**CUSCO BIENESTAR** = AI-powered local business discovery platform, Sacred Valley, Peru. Tourists search + book experiences; local businesses claim profiles for direct WhatsApp leads. MVP monetization: S/5 one-time identity validation + S/49/month subscription.
 
 ---
 

@@ -5,8 +5,8 @@ function replaceInFile(filePath) {
   let content = fs.readFileSync(filePath, 'utf8');
   let originalContent = content;
 
-  content = content.replace(/unlockcusco\.app/g, 'unlockcusco.com');
-  content = content.replace(/UnlockCusco\.app/g, 'UnlockCusco.com');
+  content = content.replace(/unlockcusco\.app/g, 'cuscobienestar.com');
+  content = content.replace(/UnlockCusco\.app/g, 'cuscobienestar.com');
 
   if (content !== originalContent) {
     fs.writeFileSync(filePath, content, 'utf8');
@@ -14,27 +14,19 @@ function replaceInFile(filePath) {
   }
 }
 
-function walkDir(dir) {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
-    if (stat.isDirectory()) {
-      if (!['node_modules', '.git', '.next', '.gemini', '.claude'].includes(file)) {
-        walkDir(filePath);
+function traverseDir(dir) {
+  fs.readdirSync(dir).forEach(file => {
+    const fullPath = path.join(dir, file);
+    if (fs.lstatSync(fullPath).isDirectory()) {
+      if (!fullPath.includes('node_modules') && !fullPath.includes('.git') && !fullPath.includes('.next')) {
+        traverseDir(fullPath);
       }
-    } else if (
-      filePath.endsWith('.tsx') || 
-      filePath.endsWith('.ts') || 
-      filePath.endsWith('.jsx') || 
-      filePath.endsWith('.js') || 
-      filePath.endsWith('.md')
-    ) {
-      replaceInFile(filePath);
+    } else {
+      if (fullPath.endsWith('.ts') || fullPath.endsWith('.tsx') || fullPath.endsWith('.js') || fullPath.endsWith('.json') || fullPath.endsWith('.md')) {
+        replaceInFile(fullPath);
+      }
     }
-  }
+  });
 }
 
-console.log('Starting domain replacement...');
-walkDir(path.join(__dirname, '../'));
-console.log('Domain replacement complete!');
+traverseDir(process.cwd());
