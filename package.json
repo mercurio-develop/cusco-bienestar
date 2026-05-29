@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 5005",
+    "dev": "next dev -p 3000",
     "build": "next build --webpack",
     "start": "next start -p 5005",
     "lint": "eslint",
@@ -12,7 +12,8 @@
     "db:clean": "python3 scripts/clean_db.py",
     "postinstall": "prisma generate",
     "cap": "cap",
-    "init-llm": "bash scripts/init-llm.sh"
+    "init-llm": "bash scripts/init-llm.sh",
+    "db:seed": "tsx scripts/seed-wellness.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.71",
