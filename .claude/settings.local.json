@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker image *)",
+      "Bash(bash *)",
+      "Bash(git checkout *)",
+      "Bash(docker stop 213bec9b90c6 *)",
+      "Bash(git -C /home/tushita/dev/cusco-bienestar add agent.Dockerfile scripts/orqo/docker-afk.sh scripts/orqo/docker-merge.sh)",
+      "Bash(git -C /home/tushita/dev/cusco-bienestar commit -m ' *)",
+      "Bash(git -C /home/tushita/dev/cusco-bienestar ls-files)",
+      "Bash(git -C /home/tushita/dev/cusco-bienestar add scripts/orqo/docker-merge.sh)",
+      "Bash(git *)",
+      "Bash(rtk proxy *)",
+      "Bash(xargs grep -l \"}}$\\\\|^\\)\\\\s*}\\\\s*$\")",
+      "Bash(rm -rf /home/tushita/dev/cusco-bienestar/.idea)",
+      "Bash(rtk git *)",
+      "WebFetch(domain:oona.es)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn"
+  ]
+}

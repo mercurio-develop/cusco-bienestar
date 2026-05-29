@@ -1,0 +1,1 @@
+export { default, generateMetadata } from "../../business/[slug]/page"
