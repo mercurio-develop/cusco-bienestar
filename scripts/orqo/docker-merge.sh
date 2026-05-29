@@ -26,8 +26,10 @@ BRANCH_NAME="task/$TASK_NAME"
 
 echo "Evaluating branch: $BRANCH_NAME"
 
-# Fetch latest
+# Fetch latest and ensure branch exists locally
 git fetch origin
+git checkout -B "$BRANCH_NAME" "origin/$BRANCH_NAME"
+git checkout main
 
 # Extract git diff between main and branch to review
 DIFF=$(git diff main...$BRANCH_NAME)
