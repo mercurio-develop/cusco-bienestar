@@ -89,7 +89,7 @@ export function AiConcierge() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm sm:text-base text-slate-900 tracking-wide uppercase">
-                      UNLOCK<span className="text-rose-500">CUSCO</span> <span className="capitalize">Concierge</span>
+                      CUSCO<span className="text-rose-500">BIENESTAR</span> <span className="capitalize">Concierge</span>
                     </h3>
                     <p className="text-[10px] sm:text-xs text-slate-500 font-medium">AI Travel Assistant</p>
                   </div>

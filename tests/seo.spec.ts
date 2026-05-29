@@ -5,7 +5,7 @@ test.describe('SEO Engine', () => {
     await page.goto('/');
 
     // Check title
-    await expect(page).toHaveTitle(/Cusco Bienestar|UNLOCKCUSCO/);
+    await expect(page).toHaveTitle(/Cusco Bienestar/);
 
     // Check canonical link
     const canonical = page.locator('link[rel="canonical"]');
