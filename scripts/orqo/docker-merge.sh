@@ -6,9 +6,9 @@ echo " Docker Auto-Merge Agent Started"
 echo "======================================"
 
 # Ensure the Docker image exists
-if ! docker image inspect gemini-sandbox > /dev/null 2>&1; then
+if ! docker image inspect claude-sandbox > /dev/null 2>&1; then
   echo "Building Docker sandbox image..."
-  docker build -t gemini-sandbox -f agent.Dockerfile .
+  docker build -t claude-sandbox -f agent.Dockerfile .
 fi
 
 git checkout main
@@ -45,13 +45,12 @@ else
   REVIEW_RESULT=$(docker run --rm \
     -v "$(pwd):/workspace" \
     -w /workspace \
-    -v "$HOME/.gemini:/home/node/.gemini" \
-    -v "$HOME/.gemini/hooks:/home/tushita/.gemini/hooks" \
-    -e GEMINI_API_KEY="$GEMINI_API_KEY" \
-    -e GEMINI_CLI_TRUST_WORKSPACE=true \
+    -v "$HOME/.claude:/home/node/.claude" \
+    -v "$HOME/.claude.json:/home/node/.claude.json" \
+    -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
     --user $(id -u):$(id -g) \
-    gemini-sandbox \
-    gemini -y -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+    claude-sandbox \
+    claude --dangerously-skip-permissions -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
 $ESCAPED_DIFF")
 fi
 

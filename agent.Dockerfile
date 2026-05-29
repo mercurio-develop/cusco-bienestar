@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Gemini CLI globally
-RUN npm install -g @google/gemini-cli
+RUN npm install -g @anthropic-ai/claude-code
 
 # Set the working directory to where the project will be mounted
 WORKDIR /workspace

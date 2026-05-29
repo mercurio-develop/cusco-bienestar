@@ -7,9 +7,9 @@ if [ -z "$1" ]; then
 fi
 
 # Ensure the Docker image exists
-if ! docker image inspect gemini-sandbox > /dev/null 2>&1; then
+if ! docker image inspect claude-sandbox > /dev/null 2>&1; then
   echo "Building Docker sandbox image..."
-  docker build -t gemini-sandbox -f agent.Dockerfile .
+  docker build -t claude-sandbox -f agent.Dockerfile .
 fi
 
 for ((i=1; i<=$1; i++)); do
@@ -49,13 +49,12 @@ for ((i=1; i<=$1; i++)); do
   docker run --rm \
     -v "$(pwd):/workspace" \
     -w /workspace \
-    -v "$HOME/.gemini:/home/node/.gemini" \
-    -v "$HOME/.gemini/hooks:/home/tushita/.gemini/hooks" \
-    -e GEMINI_API_KEY="$GEMINI_API_KEY" \
-    -e GEMINI_CLI_TRUST_WORKSPACE=true \
+    -v "$HOME/.claude:/home/node/.claude" \
+    -v "$HOME/.claude.json:/home/node/.claude.json" \
+    -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
     --user $(id -u):$(id -g) \
-    gemini-sandbox \
-    gemini -y -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+    claude-sandbox \
+    claude --dangerously-skip-permissions -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
 
   # 4. Finalize
   if [[ -n $(git status -s) ]]; then
@@ -65,10 +64,17 @@ for ((i=1; i<=$1; i++)); do
   fi
 
   echo "Pushing branch $BRANCH_NAME to origin..."
-  git push -u origin "$BRANCH_NAME" || echo "Failed to push branch. Is remote configured?"
+  git push -u origin "$BRANCH_NAME" --force-with-lease || git push -u origin "$BRANCH_NAME" --force || echo "Failed to push branch. Is remote configured?"
 
-  echo "Moving issue to in-review..."
-  mv "issues/in-progress/$FILENAME" "issues/in-review/"
+  # Agent may have already moved the issue to done/ per prompt instructions
+  if [ -f "issues/in-progress/$FILENAME" ]; then
+    echo "Moving issue to in-review..."
+    mv "issues/in-progress/$FILENAME" "issues/in-review/"
+  elif [ -f "issues/done/$FILENAME" ]; then
+    echo "Agent marked issue as done. Skipping in-review."
+  else
+    echo "Warning: issue file $FILENAME not found in in-progress or done."
+  fi
   
   # Clean up and return to main for the next iteration
   git checkout main
