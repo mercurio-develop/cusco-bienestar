@@ -61,7 +61,7 @@ for ((i=1; i<=$ITERATIONS; i++)); do
       -e GEMINI_API_KEY="$GEMINI_API_KEY" \
       --user $(id -u):$(id -g) \
       claude-sandbox \
-      gemini --yolo -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+      gemini --yolo --skip-trust -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
   else
     # Note: The agent runs inside the container, mounted to the current directory.
     # We pass the ANTHROPIC_API_KEY from the host so it can authenticate.

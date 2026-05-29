@@ -53,7 +53,7 @@ else
       -e GEMINI_API_KEY="$GEMINI_API_KEY" \
       --user $(id -u):$(id -g) \
       claude-sandbox \
-      gemini --yolo -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+      gemini --yolo --skip-trust -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
 $ESCAPED_DIFF")
   else
     REVIEW_RESULT=$(docker run --rm \
