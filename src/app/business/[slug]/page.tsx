@@ -198,10 +198,10 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
         </div>
 
         {/* 3. Contact Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-16">
+        <div className="flex flex-col sm:flex-row gap-4 mb-10">
           {business.whatsapp && (
             <a
-              href={`https://wa.me/51${business.whatsapp.replace(/\D/g, '')}?text=${whatsappMsg}`}
+              href={`https://wa.me/51${business.whatsapp.replace(/\\D/g, '')}?text=${whatsappMsg}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center py-4 px-6 rounded-xl text-white font-medium text-lg bg-[#25D366] hover:bg-[#20bd5a] transition-colors"
@@ -222,6 +222,21 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
             </a>
           )}
         </div>
+
+        {!business.isClaimed && (
+          <div className="mb-16 bg-blue-50 border border-blue-100 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg font-bold text-blue-900">Is this your business?</h3>
+              <p className="text-sm text-blue-700">Claim this profile for free to update your info and receive direct leads.</p>
+            </div>
+            <Link 
+              href={`/business/${business.slug}/claim`}
+              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors whitespace-nowrap"
+            >
+              Claim for Free
+            </Link>
+          </div>
+        )}
 
         {/* 4. Map Section */}
         {(business.lat && business.lng) && (
