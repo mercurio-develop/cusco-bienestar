@@ -73,7 +73,7 @@ for ((i=1; i<=$ITERATIONS; i++)); do
       -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
       --user $(id -u):$(id -g) \
       claude-sandbox \
-      claude --dangerously-skip-permissions -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+      gemini --yolo --skip-trust -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
   fi
 
   # 4. Finalize
