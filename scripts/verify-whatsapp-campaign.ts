@@ -1,5 +1,5 @@
 /**
- * UNLOCKCUSCO WHATSAPP VERIFICATION CAMPAIGN
+ * CUSCO BIENESTAR WHATSAPP VERIFICATION CAMPAIGN
  *
  * Sends a message to all unclaimed businesses asking them to reply "VERIFICA"
  * to verify their WhatsApp number. On reply, the webhook at /api/whatsapp
@@ -35,11 +35,11 @@ async function sendVerification(businessId: string, phone: string, businessName:
     }
   }
 
-  const verifyUrl = `https://unlockcusco.com/es/business/${slug}?verify=${token}`;
+  const verifyUrl = `https://cuscobienestar.com/es/business/${slug}?verify=${token}`;
 
   const message = `Hola ${businessName} 👋
 
-Soy UnlockCusco, la guía de turismo del Valle Sagrado de los Incas.
+Soy Cusco Bienestar, la guía de turismo del Valle Sagrado de los Incas.
 
 Los turistas buscan tu negocio en nuestra plataforma. Para que puedan contactarte directamente por WhatsApp, ingresa a este enlace para verificar tu negocio:
 ${verifyUrl}
@@ -49,7 +49,7 @@ O si prefieres, simplemente responde con la palabra *VERIFICA* a este mensaje.
 Es gratis y solo toma 5 segundos ✅
 
 ---
-Hello ${businessName}! Tourists are searching for you on UnlockCusco — the Sacred Valley travel guide. Click this link to verify your business:
+Hello ${businessName}! Tourists are searching for you on Cusco Bienestar — the Sacred Valley travel guide. Click this link to verify your business:
 ${verifyUrl.replace('/es/', '/en/')}
 
 Or reply *VERIFY* to activate your WhatsApp contact button for tourists. Free & instant.`;
@@ -77,7 +77,7 @@ Or reply *VERIFY* to activate your WhatsApp contact button for tourists. Free & 
 }
 
 async function runCampaign() {
-  console.log(`\n🚀 UnlockCusco WhatsApp Verification Campaign ${DRY_RUN ? '[DRY RUN]' : ''}`);
+  console.log(`\n🚀 Cusco Bienestar WhatsApp Verification Campaign ${DRY_RUN ? '[DRY RUN]' : ''}`);
   console.log('='.repeat(55));
 
   const businesses = await prisma.business.findMany({
