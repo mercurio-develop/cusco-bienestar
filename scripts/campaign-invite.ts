@@ -81,4 +81,3 @@ async function runCampaign() {
 runCampaign()
   .catch(console.error)
   .finally(() => prisma.$disconnect());
-connect());

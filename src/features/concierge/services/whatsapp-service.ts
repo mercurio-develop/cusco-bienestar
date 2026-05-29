@@ -65,5 +65,3 @@ export async function handleIncomingWhatsAppMessage(body: any) {
 
   return { ok: true, verified: business.name };
 }
-;
-}

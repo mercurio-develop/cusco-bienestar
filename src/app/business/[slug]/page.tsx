@@ -632,5 +632,3 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
     </main>
   )
 }
-)
-}
