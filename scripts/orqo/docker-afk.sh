@@ -2,7 +2,16 @@
 set -eo pipefail
 
 if [ -z "$1" ]; then
-  echo "Usage: $0 <iterations>"
+  echo "Usage: $0 <iterations> [gemini|claude]"
+  exit 1
+fi
+
+ITERATIONS=$1
+AI_TOOL=${2:-gemini} # Default to gemini if not provided
+
+# Validate AI tool
+if [[ "$AI_TOOL" != "gemini" && "$AI_TOOL" != "claude" ]]; then
+  echo "Invalid AI tool specified. Choose 'gemini' or 'claude'."
   exit 1
 fi
 
@@ -12,9 +21,9 @@ if ! docker image inspect claude-sandbox > /dev/null 2>&1; then
   docker build -t claude-sandbox -f agent.Dockerfile .
 fi
 
-for ((i=1; i<=$1; i++)); do
+for ((i=1; i<=$ITERATIONS; i++)); do
   echo "======================================"
-  echo " Docker Agent Factory Iteration $i of $1"
+  echo " Docker Agent Factory Iteration $i of $ITERATIONS (Tool: $AI_TOOL)"
   echo "======================================"
   
   # Ensure we start from main
@@ -42,19 +51,30 @@ for ((i=1; i<=$1; i++)); do
   task_content=$(cat "issues/in-progress/$FILENAME")
   prompt=$(cat scripts/orqo/prompt.md 2>/dev/null || echo "")
 
-  echo "Running containerized agent for $TASK_NAME..."
+  echo "Running containerized agent for $TASK_NAME using $AI_TOOL..."
   
-  # Note: The agent runs inside the container, mounted to the current directory.
-  # We pass the GEMINI_API_KEY from the host so it can authenticate.
-  docker run --rm \
-    -v "$(pwd):/workspace" \
-    -w /workspace \
-    -v "$HOME/.claude:/home/node/.claude" \
-    -v "$HOME/.claude.json:/home/node/.claude.json" \
-    -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
-    --user $(id -u):$(id -g) \
-    claude-sandbox \
-    claude --dangerously-skip-permissions -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+  if [ "$AI_TOOL" = "gemini" ]; then
+    docker run --rm \
+      -v "$(pwd):/workspace" \
+      -w /workspace \
+      -v "$HOME/.gemini:/home/node/.gemini" \
+      -e GEMINI_API_KEY="$GEMINI_API_KEY" \
+      --user $(id -u):$(id -g) \
+      claude-sandbox \
+      gemini --dangerously-skip-permissions -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+  else
+    # Note: The agent runs inside the container, mounted to the current directory.
+    # We pass the ANTHROPIC_API_KEY from the host so it can authenticate.
+    docker run --rm \
+      -v "$(pwd):/workspace" \
+      -w /workspace \
+      -v "$HOME/.claude:/home/node/.claude" \
+      -v "$HOME/.claude.json:/home/node/.claude.json" \
+      -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+      --user $(id -u):$(id -g) \
+      claude-sandbox \
+      claude --dangerously-skip-permissions -p "Task: $TASK_NAME. Context: $task_content. Instructions: $prompt. Implement the task, verify it, and MAKE A GIT COMMIT with your changes."
+  fi
 
   # 4. Finalize
   if [[ -n $(git status -s) ]]; then
@@ -80,4 +100,4 @@ for ((i=1; i<=$1; i++)); do
   git checkout main
 done
 
-echo "Finished $1 iterations."
+echo "Finished $ITERATIONS iterations."

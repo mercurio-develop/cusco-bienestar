@@ -43,17 +43,30 @@ if [ ${#DIFF} -gt 150000 ]; then
   REVIEW_RESULT="APPROVE"
 else
   # Review the diff using the containerized agent
-  echo "Running AI Code Review via Sandbox..."
-  REVIEW_RESULT=$(docker run --rm \
-    -v "$(pwd):/workspace" \
-    -w /workspace \
-    -v "$HOME/.claude:/home/node/.claude" \
-    -v "$HOME/.claude.json:/home/node/.claude.json" \
-    -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
-    --user $(id -u):$(id -g) \
-    claude-sandbox \
-    claude --dangerously-skip-permissions -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+  echo "Running AI Code Review via Sandbox using $AI_TOOL..."
+  
+  if [ "$AI_TOOL" = "gemini" ]; then
+    REVIEW_RESULT=$(docker run --rm \
+      -v "$(pwd):/workspace" \
+      -w /workspace \
+      -v "$HOME/.gemini:/home/node/.gemini" \
+      -e GEMINI_API_KEY="$GEMINI_API_KEY" \
+      --user $(id -u):$(id -g) \
+      claude-sandbox \
+      gemini --dangerously-skip-permissions -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
 $ESCAPED_DIFF")
+  else
+    REVIEW_RESULT=$(docker run --rm \
+      -v "$(pwd):/workspace" \
+      -w /workspace \
+      -v "$HOME/.claude:/home/node/.claude" \
+      -v "$HOME/.claude.json:/home/node/.claude.json" \
+      -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+      --user $(id -u):$(id -g) \
+      claude-sandbox \
+      claude --dangerously-skip-permissions -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+$ESCAPED_DIFF")
+  fi
 fi
 
 echo "AI Review Result: $REVIEW_RESULT"

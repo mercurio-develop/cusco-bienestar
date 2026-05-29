@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
     openssh-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Gemini CLI globally
-RUN npm install -g @anthropic-ai/claude-code
+# Install AI CLIs globally
+RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli
 
 # Set the working directory to where the project will be mounted
 WORKDIR /workspace
