@@ -53,7 +53,7 @@ else
       -e GEMINI_API_KEY="$GEMINI_API_KEY" \
       --user $(id -u):$(id -g) \
       claude-sandbox \
-      gemini --yolo --skip-trust -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+      gemini --dangerously-skip-permissions -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
 $ESCAPED_DIFF")
   else
     REVIEW_RESULT=$(docker run --rm \
@@ -74,6 +74,13 @@ echo "AI Review Result: $REVIEW_RESULT"
 if [[ "$REVIEW_RESULT" == *"APPROVE"* ]]; then
   echo "AI approved the PR. Merging..."
   git merge --no-ff "$BRANCH_NAME" -m "Merge branch '$BRANCH_NAME' (AI Approved)"
+  git push origin main
+  mv "$ISSUE_FILE" "issues/done/"
+  echo "Successfully merged $TASK_NAME!"
+else
+  echo "AI rejected the PR. Returning issue to todo..."
+  mv "$ISSUE_FILE" "issues/todo/"
+fi'$BRANCH_NAME' (AI Approved)"
   git push origin main
   mv "$ISSUE_FILE" "issues/done/"
   echo "Successfully merged $TASK_NAME!"
