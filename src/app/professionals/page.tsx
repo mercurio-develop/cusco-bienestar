@@ -137,7 +137,7 @@ export default async function ProfessionalsPage({
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {professionals.map((professional) => (
-                <DirectoryCard key={professional.id} business={professional} />
+                <DirectoryCard key={professional.id} business={professional} href={`/professionals/${professional.slug}`} />
               ))}
             </div>
           </>

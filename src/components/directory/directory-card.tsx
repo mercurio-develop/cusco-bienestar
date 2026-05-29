@@ -9,16 +9,17 @@ import type { Business } from "@prisma/client"
 
 interface DirectoryCardProps {
   business: Business
+  href?: string
 }
 
-export function DirectoryCard({ business }: DirectoryCardProps) {
+export function DirectoryCard({ business, href }: DirectoryCardProps) {
   const catData = getCategoryData(business.category)
   const CatIcon = catData.icon
   const displayImage = business.imageUrl || catData.fallbackImage
 
   return (
     <Link
-      href={`/business/${business.slug}`}
+      href={href ?? `/business/${business.slug}`}
       className="group block bg-white border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
     >
       {/* Image */}
