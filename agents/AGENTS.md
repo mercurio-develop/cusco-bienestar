@@ -84,8 +84,8 @@ Breaking changes — APIs, conventions, file structure may differ from training 
    - Setup Vercel deployment + Husky pre-commit hooks to protect zero-error codebase.
 
 4. **The B2B Onboarding Pivot (Free Flow)**
-   - Remove S/5 checkout flow for local businesses claiming profiles.
-   - B2B acquisition = 100% free flow: upload Yape QR code only.
+   - [x] Remove S/5 checkout flow for local businesses claiming profiles.
+   - [x] B2B acquisition = 100% free flow: upload Yape QR code only.
 
 ### P1 — Polish
 
