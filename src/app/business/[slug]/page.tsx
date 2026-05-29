@@ -8,17 +8,16 @@ import type { Metadata } from "next"
 import { MapPin, MessageCircle } from "lucide-react"
 import { siteConfig } from "@/lib/config/site"
 import { SafeImageWrapper } from "@/components/ui/safe-image"
-import { getDictionary, Locale } from "@/lib/dictionaries"
 
 interface BusinessPageProps {
-  params: Promise<{ slug: string, lang: string }>
+  params: Promise<{ slug: string }>
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export const revalidate = 86400; // Cache for 1 day
 
 export async function generateMetadata({ params }: BusinessPageProps): Promise<Metadata> {
-  const { slug, lang } = await params
+  const { slug } = await params
   const business = await prisma.business.findUnique({
     where: { slug: slug },
     include: { premiumProfile: true }
@@ -28,35 +27,29 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
     return { title: 'Not Found | Cusco Bienestar' }
   }
 
-  const isEs = lang === 'es'
-  const bName = isEs && business.nameEs ? business.nameEs : business.name
-  const bCategory = isEs && business.categoryEs ? business.categoryEs : business.category
-  const bTagline = isEs && business.taglineEs ? business.taglineEs : business.tagline
-  const bSeoMetaTitle = isEs && business.seoMetaTitleEs ? business.seoMetaTitleEs : business.seoMetaTitle
-  const bSeoMetaDesc = isEs && business.seoMetaDescEs ? business.seoMetaDescEs : business.seoMetaDesc
+  const bName = business.nameEs || business.name
+  const bCategory = business.categoryEs || business.category
+  const bTagline = business.taglineEs || business.tagline
+  const bSeoMetaTitle = business.seoMetaTitleEs || business.seoMetaTitle
+  const bSeoMetaDesc = business.seoMetaDescEs || business.seoMetaDesc
 
   const categoryName = bCategory ? bCategory.charAt(0).toUpperCase() + bCategory.slice(1).toLowerCase() : bCategory
-  const locationName = business.locationSlug ? business.locationSlug.charAt(0).toUpperCase() + business.locationSlug.slice(1) : (isEs ? "el Valle Sagrado" : "the Sacred Valley")
-  const title = bSeoMetaTitle || `${bName} — ${categoryName} ${isEs ? 'en' : 'in'} ${locationName}`
-  const description = bSeoMetaDesc || bTagline || (isEs ? `Lee reseñas, mira fotos y contacta a ${bName} directamente. Calificación: ${business.rating?.toFixed(1) || 'Nuevo'} estrellas.` : `Read reviews, view photos, and contact ${bName} directamente. Average rating: ${business.rating?.toFixed(1) || 'New'} stars.`)
+  const locationName = business.locationSlug ? business.locationSlug.charAt(0).toUpperCase() + business.locationSlug.slice(1) : "el Valle Sagrado"
+  const title = bSeoMetaTitle || `${bName} — ${categoryName} en ${locationName}`
+  const description = bSeoMetaDesc || bTagline || `Lee reseñas, mira fotos y contacta a ${bName} directamente. Calificación: ${business.rating?.toFixed(1) || 'Nuevo'} estrellas.`
 
-  const ogImage = business.premiumProfile?.coverPhotoUrl || business.premiumProfile?.logoUrl || `/api/og?title=${encodeURIComponent(bName || 'Cusco Bienestar')}&description=${encodeURIComponent((categoryName || '') + (isEs ? ' en ' : ' in ') + locationName)}&image=${encodeURIComponent(business.imageUrl || '')}${business.rating ? '&rating=' + business.rating : ''}`
+  const ogImage = business.premiumProfile?.coverPhotoUrl || business.premiumProfile?.logoUrl || `/api/og?title=${encodeURIComponent(bName || 'Cusco Bienestar')}&description=${encodeURIComponent((categoryName || '') + ' en ' + locationName)}&image=${encodeURIComponent(business.imageUrl || '')}${business.rating ? '&rating=' + business.rating : ''}`
 
   return {
     title,
     description,
     alternates: {
-      canonical: `${siteConfig.url}/${lang}/business/${business.slug}`,
-      languages: {
-        en: `${siteConfig.url}/en/business/${business.slug}`,
-        es: `${siteConfig.url}/es/business/${business.slug}`,
-        'x-default': `${siteConfig.url}/en/business/${business.slug}`,
-      }
+      canonical: `${siteConfig.url}/business/${business.slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `${siteConfig.url}/${lang}/business/${business.slug}`,
+      url: `${siteConfig.url}/business/${business.slug}`,
       siteName: "Cusco Bienestar",
       images: [
         {
@@ -77,10 +70,8 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
   }
 }
 
-export default async function BusinessPage({ params, searchParams }: BusinessPageProps) {
-  const { slug, lang } = await params
-  
-  const isEs = lang === 'es'
+export default async function BusinessPage({ params }: BusinessPageProps) {
+  const { slug } = await params
 
   const business = await prisma.business.findUnique({
     where: { slug: slug },
@@ -90,25 +81,19 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
   if (!business) return notFound()
 
   // Use longDescription if available, fallback to short description
-  business.description = business.longDescription || business.description
-
-  if (isEs) {
-    business.name = business.nameEs || business.name
-    business.category = business.categoryEs || business.category
-    business.description = business.longDescriptionEs || business.descriptionEs || business.description
-  }
+  business.description = business.longDescriptionEs || business.descriptionEs || business.longDescription || business.description
+  business.name = business.nameEs || business.name
+  business.category = business.categoryEs || business.category
 
   const categoryName = business.category ? business.category.charAt(0).toUpperCase() + business.category.slice(1).toLowerCase() : business.category
-  const locationName = business.locationSlug ? business.locationSlug.charAt(0).toUpperCase() + business.locationSlug.slice(1) : (isEs ? "el Valle Sagrado" : "the Sacred Valley")
+  const locationName = business.locationSlug ? business.locationSlug.charAt(0).toUpperCase() + business.locationSlug.slice(1) : "el Valle Sagrado"
   const bName = business.name
 
   const heroImage = business.imageUrl || business.premiumProfile?.coverPhotoUrl || '/images/og-default.jpg'
   
   // Format WhatsApp message
   const whatsappMsg = encodeURIComponent(
-    isEs 
-      ? `¡Hola ${bName}! 👋 Vi su perfil en Cusco Bienestar y me gustaría hacer una consulta.`
-      : `Hello ${bName}! 👋 I saw your profile on Cusco Bienestar and I'd like to make an inquiry.`
+    `¡Hola ${bName}! 👋 Vi su perfil en Cusco Bienestar y me gustaría hacer una consulta.`
   )
 
   const schemaTypeMap: Record<string, string> = {
@@ -139,7 +124,7 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
     "name": business.name || 'Business',
     "image": heroImage ? [heroImage] : undefined,
     "description": business.description || business.tagline || '',
-    "url": `${siteConfig.url}/${lang}/business/${business.slug}`,
+    "url": `${siteConfig.url}/business/${business.slug}`,
     "telephone": business.whatsapp ? `+51${business.whatsapp.replace(/\D/g, '')}` : undefined,
     "priceRange": business.priceTier || "$$",
     "sameAs": sameAsLinks.length > 0 ? sameAsLinks : undefined,
@@ -179,8 +164,8 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
         <div className="absolute inset-0 bg-black/10" />
         
         <div className="absolute top-6 left-6 z-10">
-          <Link href={`/${lang}/explore`} className="inline-flex items-center text-white bg-black/30 hover:bg-black/50 px-5 py-2.5 rounded-full backdrop-blur-md text-sm font-medium transition-colors border border-white/10">
-            ← {isEs ? 'Volver' : 'Back'}
+          <Link href="/explore" className="inline-flex items-center text-white bg-black/30 hover:bg-black/50 px-5 py-2.5 rounded-full backdrop-blur-md text-sm font-medium transition-colors border border-white/10">
+            ← Volver al directorio
           </Link>
         </div>
       </section>
@@ -207,7 +192,7 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
              </p>
           ) : (
             <p className="text-slate-400 italic">
-              {isEs ? 'No hay descripción disponible.' : 'No description available.'}
+              No hay descripción disponible.
             </p>
           )}
         </div>
@@ -222,7 +207,7 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
               className="flex-1 flex items-center justify-center py-4 px-6 rounded-xl text-white font-medium text-lg bg-[#25D366] hover:bg-[#20bd5a] transition-colors"
             >
               <MessageCircle className="w-5 h-5 mr-2" />
-              WhatsApp {isEs ? 'directo' : 'direct'}
+              WhatsApp directo
             </a>
           )}
           {business.instagramHandle && (
