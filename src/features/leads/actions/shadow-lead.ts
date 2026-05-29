@@ -26,7 +26,7 @@ export async function generateShadowLead(businessId: string, touristName: string
   else if (business.category === 'WELLNESS') contextNote = "recommended your wellness services";
   else if (business.category === 'TRANSPORT') contextNote = "recommended your transport services";
 
-  const rawText = `Hello team at ${business.name}! 👋 Our AI assistant (UNLOCKCUSCO) just ${contextNote} to ${touristName} for the date ${date}.\n\nSince your profile is still 'Unverified', the tourist couldn't message you directly. To receive the tourist's contact info and close this sale, please contact us to verify your profile.`
+  const rawText = `Hello team at ${business.name}! 👋 Our AI assistant (Cusco Bienestar) just ${contextNote} to ${touristName} for the date ${date}.\n\nSince your profile is still 'Unverified', the tourist couldn't message you directly. To receive the tourist's contact info and close this sale, please contact us to verify your profile.`
 
   try {
     await ghostPhoneFetch('/api/message/send', { phone: business.whatsapp, message: rawText });
