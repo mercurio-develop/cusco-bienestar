@@ -1,6 +1,6 @@
 #!/bin/bash
 # init-llm.sh
-# Initializes the LLM workspace and autonomous workflow setup for UnlockCusco
+# Initializes the LLM workspace and autonomous workflow setup for Cusco Bienestar
 
 echo "Initializing LLM Workspace..."
 

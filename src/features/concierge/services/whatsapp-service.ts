@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { revalidateTag } from 'next/cache';
 import { ghostPhoneFetch } from '@/lib/config/services';
 
-const TRIGGER_WORDS = ['VERIFICA', 'VERIFY', 'UNLOCKCUSCO', 'VALLE', 'SI', 'SÍ', 'YES', 'OK', '1'];
+const TRIGGER_WORDS = ['VERIFICA', 'VERIFY', 'CUSCOBIENESTAR', 'VALLE', 'SI', 'SÍ', 'YES', 'OK', '1'];
 
 async function sendWA(phone: string, message: string) {
   try {
@@ -15,7 +15,7 @@ async function sendWA(phone: string, message: string) {
 function buildExploreUrl(business: { name: string; locationSlug: string | null; category: string }) {
   const loc = business.locationSlug || 'urubamba';
   const cat = (business.category || 'culture').toLowerCase();
-  return `https://unlockcusco.com/explore/${loc}/${cat}?q=${encodeURIComponent(business.name)}`;
+  return `https://cuscobienestar.com/explore/${loc}/${cat}?q=${encodeURIComponent(business.name)}`;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +34,7 @@ export async function handleIncomingWhatsAppMessage(body: any) {
         data: { lat: parseFloat(body.latitude), lng: parseFloat(body.longitude) }
       });
       ;(revalidateTag as (t: string) => void)('businesses');
-      await sendWA(rawPhone, `📍 ¡Ubicación actualizada! Tu pin en el mapa de UnlockCusco ya refleja tu posición real. / Location updated on the UnlockCusco map!`);
+      await sendWA(rawPhone, `📍 ¡Ubicación actualizada! Tu pin en el mapa de Cusco Bienestar ya refleja tu posición real. / Location updated on the Cusco Bienestar map!`);
     }
     return { ok: true };
   }
@@ -50,7 +50,7 @@ export async function handleIncomingWhatsAppMessage(body: any) {
   // Already verified — just send a reminder
   if (business.isClaimed) {
     const exploreUrl = buildExploreUrl(business);
-    await sendWA(rawPhone, `✅ ${business.name} ya está verificado en UnlockCusco. Los turistas pueden contactarte directamente.\n\n👉 Tu perfil: ${exploreUrl}`);
+    await sendWA(rawPhone, `✅ ${business.name} ya está verificado en Cusco Bienestar. Los turistas pueden contactarte directamente.\n\n👉 Tu perfil: ${exploreUrl}`);
     return { ok: true, alreadyVerified: true };
   }
 
@@ -60,8 +60,10 @@ export async function handleIncomingWhatsAppMessage(body: any) {
 
   const exploreUrl = buildExploreUrl(business);
   await sendWA(rawPhone,
-    `✅ ¡Verificado, ${business.name}! Ahora los turistas pueden contactarte directamente por WhatsApp en UnlockCusco.\n\n👉 Ve tu negocio en el mapa:\n${exploreUrl}\n\n📍 ¿Quieres mejorar tu ubicación en el mapa? Comparte tu *ubicación de WhatsApp* respondiendo con tu pin GPS.\n\n---\nVerified! Tourists can now contact you directly. View your listing: ${exploreUrl}`
+    `✅ ¡Verificado, ${business.name}! Ahora los turistas pueden contactarte directamente por WhatsApp en Cusco Bienestar.\n\n👉 Ve tu negocio en el mapa:\n${exploreUrl}\n\n📍 ¿Quieres mejorar tu ubicación en el mapa? Comparte tu *ubicación de WhatsApp* respondiendo con tu pin GPS.\n\n---\nVerified! Tourists can now contact you directly. View your listing: ${exploreUrl}`
   );
 
   return { ok: true, verified: business.name };
+}
+;
 }

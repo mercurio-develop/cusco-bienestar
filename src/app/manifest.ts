@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'UnlockCusco',
-    short_name: 'UnlockCusco',
+    name: 'Cusco Bienestar',
+    short_name: 'Cusco Bienestar',
     description: 'Your AI Travel Concierge for Cusco & the Sacred Valley',
     start_url: '/',
     display: 'standalone',

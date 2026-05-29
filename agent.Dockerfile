@@ -15,10 +15,9 @@ RUN npm install -g @google/gemini-cli
 # Set the working directory to where the project will be mounted
 WORKDIR /workspace
 
-# Create a non-root user that matches the typical host UID (1000)
+# Use the existing 'node' user that matches the typical host UID (1000)
 # This ensures files created by the agent aren't owned by root on the host machine.
-RUN useradd -u 1000 -m agent
-USER agent
+USER node
 
 # Default command if none is provided
 CMD ["bash"]

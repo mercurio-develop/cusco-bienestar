@@ -1,5 +1,5 @@
 /**
- * UNLOCKCUSCO B2B CAMPAIGN SCRIPT
+ * CUSCO BIENESTAR B2B CAMPAIGN SCRIPT
  * 
  * Purpose: Send mass invitations to local businesses in the Sacred Valley
  * to join the UnlockCusco platform.
@@ -17,7 +17,7 @@ const WEBHOOK_SECRET = 'dev-secret';
 async function sendInvite(phone: string, businessName: string) {
   const message = `Hola ${businessName}! 👋 
   
-Soy del equipo de UnlockCusco.com. Estamos lanzando la plataforma #1 para conectar turistas con los mejores negocios del Valle Sagrado.
+Soy del equipo de Cusco Bienestar. Estamos lanzando la plataforma #1 para conectar turistas con los mejores negocios del Valle Sagrado.
 
 Hemos pre-registrado tu perfil y queremos invitarte a tomar el control de tus leads directamente por WhatsApp.
 
@@ -81,3 +81,4 @@ async function runCampaign() {
 runCampaign()
   .catch(console.error)
   .finally(() => prisma.$disconnect());
+connect());

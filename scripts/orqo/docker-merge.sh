@@ -42,11 +42,14 @@ else
   # Use process substitution or echo to safely pass diff to gemini
   REVIEW_RESULT=$(docker run --rm \
     -v "$(pwd):/workspace" \
+    -v "$HOME/.gemini:/home/node/.gemini" \
     -w /workspace \
     -e GEMINI_API_KEY="$GEMINI_API_KEY" \
+    -e GEMINI_CLI_TRUST_WORKSPACE=true \
     --user $(id -u):$(id -g) \
     gemini-sandbox \
-    bash -c "gemini \"You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:\"$'\n'\"$DIFF\"")
+    gemini -p "You are an automated merge agent. Review the following Git Diff for branch '$BRANCH_NAME' against main. If the diff looks reasonably safe, implements the feature without obvious syntax errors, and does not contain destructive actions outside its scope, respond with EXACTLY 'APPROVE'. Otherwise, respond with 'REJECT: <reason>'. Diff:
+$DIFF")
 fi
 
 echo "AI Review Result: $REVIEW_RESULT"

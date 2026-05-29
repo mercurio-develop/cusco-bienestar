@@ -27,11 +27,11 @@ export default async function SorocheGuidePage({ params }: { params: Promise<{ l
             "headline": content.metadata.title,
             "description": content.metadata.description,
             "image": "https://images.unsplash.com/photo-1501555088652-021faa106b9b?q=80&w=1000&auto=format&fit=crop",
-            "author": { "@type": "Organization", "name": "UnlockCusco" },
+            "author": { "@type": "Organization", "name": "Cusco Bienestar" },
             "publisher": {
               "@type": "Organization",
-              "name": "UnlockCusco",
-              "logo": { "@type": "ImageObject", "url": "https://unlockcusco.com/icon.svg" }
+              "name": "Cusco Bienestar",
+              "logo": { "@type": "ImageObject", "url": "https://cuscobienestar.com/icon.svg" }
             },
             "datePublished": new Date().toISOString().split('T')[0],
           })
