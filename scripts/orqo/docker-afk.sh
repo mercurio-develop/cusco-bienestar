@@ -29,8 +29,8 @@ for ((i=1; i<=$ITERATIONS; i++)); do
   # Ensure we start from main
   git checkout main
   
-  # Find next issue
-  ISSUE_FILE=$(ls -1 issues/todo/*.md 2>/dev/null | head -n 1)
+  # Find next issue safely
+  ISSUE_FILE=$(find issues/todo/ -maxdepth 1 -name "*.md" | head -n 1)
   if [ -z "$ISSUE_FILE" ]; then
     echo "No more tasks in issues/todo/. Exiting."
     exit 0
