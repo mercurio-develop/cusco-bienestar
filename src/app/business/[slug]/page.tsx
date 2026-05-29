@@ -108,7 +108,7 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
   })
 
   if (!business) {
-    return { title: 'Not Found | UnlockCusco' }
+    return { title: 'Not Found | Cusco Bienestar' }
   }
 
   const isEs = lang === 'es'
@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
   const title = bSeoMetaTitle || `${bName} — ${categoryName} ${isEs ? 'en' : 'in'} ${locationName}`
   const description = bSeoMetaDesc || bTagline || (isEs ? `Lee reseñas, mira fotos y contacta a ${bName} directamente. Calificación: ${business.rating?.toFixed(1) || 'Nuevo'} estrellas.` : `Read reviews, view photos, and contact ${bName} directamente. Average rating: ${business.rating?.toFixed(1) || 'New'} stars.`)
 
-  const ogImage = business.premiumProfile?.coverPhotoUrl || business.premiumProfile?.logoUrl || `/api/og?title=${encodeURIComponent(bName || 'UnlockCusco')}&description=${encodeURIComponent((categoryName || '') + (isEs ? ' en ' : ' in ') + locationName)}&image=${encodeURIComponent(business.imageUrl || '')}${business.rating ? '&rating=' + business.rating : ''}`
+  const ogImage = business.premiumProfile?.coverPhotoUrl || business.premiumProfile?.logoUrl || `/api/og?title=${encodeURIComponent(bName || 'Cusco Bienestar')}&description=${encodeURIComponent((categoryName || '') + (isEs ? ' en ' : ' in ') + locationName)}&image=${encodeURIComponent(business.imageUrl || '')}${business.rating ? '&rating=' + business.rating : ''}`
 
   return {
     title,
@@ -140,7 +140,7 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
       title,
       description,
       url: `${siteConfig.url}/${lang}/business/${business.slug}`,
-      siteName: "UnlockCusco",
+      siteName: "Cusco Bienestar",
       images: [
         {
           url: ogImage,
@@ -268,8 +268,8 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
   // Format WhatsApp message
   const whatsappMsg = encodeURIComponent(
     isEs 
-      ? `¡Hola ${business.name}! 👋 Vi su perfil en UnlockCusco y me gustaría hacer una reserva. ¿Cuándo tienen disponibilidad?`
-      : `Hello ${business.name}! 👋 I saw your profile on UnlockCusco and I'd like to make a reservation. When do you have availability?`
+      ? `¡Hola ${business.name}! 👋 Vi su perfil en Cusco Bienestar y me gustaría hacer una reserva. ¿Cuándo tienen disponibilidad?`
+      : `Hello ${business.name}! 👋 I saw your profile on Cusco Bienestar and I'd like to make a reservation. When do you have availability?`
   )
 
   const isAsociado = business.isAsociado || false
@@ -346,7 +346,7 @@ export default async function BusinessPage({ params, searchParams }: BusinessPag
       },
       "author": {
         "@type": "Person",
-        "name": review.author || "UnlockCusco User"
+        "name": review.author || "Cusco Bienestar User"
       },
       "reviewBody": review.text || '',
       "datePublished": new Date().toISOString().split('T')[0]

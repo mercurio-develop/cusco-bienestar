@@ -19,7 +19,7 @@ export function AsociadoBadge({ className, showText = true }: AsociadoBadgeProps
       </div>
       {showText && (
         <span className="text-[10px] font-extrabold text-slate-900 uppercase tracking-tighter flex flex-col leading-none">
-          <span className="text-rose-600">UnlockCusco</span>
+          <span className="text-rose-600">Cusco Bienestar</span>
           <span>Asociado</span>
         </span>
       )}

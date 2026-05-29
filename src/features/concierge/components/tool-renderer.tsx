@@ -66,7 +66,7 @@ export function ToolRenderer({ message, onShareLocation }: ToolRendererProps) {
           if (toolName === 'searchDatabase') {
             return (
               <div key={key}>
-                <PendingAvailability message="Searching UnlockCusco library..." />
+                <PendingAvailability message="Searching Cusco Bienestar library..." />
                 <style>{`#msg-text-${message.id} { display: none; }`}</style>
               </div>
             )

@@ -13,10 +13,10 @@ import { Metadata } from 'next';
 export async function generateMetadata(props: { params: Promise<{ lang: string, slug: string }> }): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const guideData = ITINERARY_GUIDES[slug];
-  if (!guideData) return { title: "Itinerary - UnlockCusco" };
+  if (!guideData) return { title: "Itinerary - Cusco Bienestar" };
   const content = lang === 'es' ? guideData.es : guideData.en;
   return {
-    title: `${content.title} - UnlockCusco`,
+    title: `${content.title} - Cusco Bienestar`,
     description: content.intro,
   };
 }

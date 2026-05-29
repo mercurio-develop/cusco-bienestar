@@ -60,7 +60,7 @@ export async function generateMetadata({
   const loc = LOCATION_LABELS[location] ?? location
   const isEs = lang === 'es'
   
-  const title = isEs ? `Explorar ${loc} — UNLOCKCUSCO Valle Sagrado` : `Explore ${loc} — UNLOCKCUSCO Sacred Valley`
+  const title = isEs ? `Explorar ${loc} — CUSCO BIENESTAR Valle Sagrado` : `Explore ${loc} — CUSCO BIENESTAR Sacred Valley`
   const description = isEs 
     ? `Descubre las mejores experiencias, restaurantes, hoteles y aventuras en ${loc}, Valle Sagrado. Reserva directamente sin comisiones.`
     : `Discover the best experiences, restaurants, hotels, and adventures in ${loc}, Sacred Valley. Book directly with zero commissions.`
@@ -125,7 +125,7 @@ export default async function LocationPage({
       {
         "@type": "ListItem",
         "position": 1,
-        "name": dict.explore.exploreUnlockCusco,
+        "name": dict.explore.exploreCusco Bienestar,
         "item": `${siteConfig.url}/${lang}/explore`
       },
       {
