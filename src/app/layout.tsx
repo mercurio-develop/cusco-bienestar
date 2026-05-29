@@ -16,6 +16,7 @@ const fontSerif = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   title: {
     template: "%s | Cusco Bienestar",
     default: "Cusco Bienestar | Directorio de Eventos y Profesionales de Bienestar",

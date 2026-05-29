@@ -11,6 +11,14 @@ test.describe('SEO Engine', () => {
     const canonical = page.locator('link[rel="canonical"]');
     await expect(canonical).toHaveCount(1);
     
+    // Check OG image
+    const ogImage = page.locator('meta[property="og:image"]');
+    await expect(ogImage).toHaveAttribute('content', /\/images\/og-default\.jpg/);
+
+    // Check Twitter image
+    const twitterImage = page.locator('meta[name="twitter:image"]');
+    await expect(twitterImage).toHaveAttribute('content', /\/images\/og-default\.jpg/);
+
     // Check JSON-LD
     const jsonLdScripts = page.locator('script[type="application/ld+json"]');
     await expect(jsonLdScripts.first()).toBeAttached();

@@ -27,6 +27,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         es: `${siteConfig.url}/es`,
         'x-default': `${siteConfig.url}/en`,
       }
+    },
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: '/images/og-default.jpg',
+          width: 1200,
+          height: 630,
+          alt: title,
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ['/images/og-default.jpg'],
     }
   }
 }
